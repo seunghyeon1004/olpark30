@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>올팍 30분, 출차 대기를 산책으로</title>
+<meta name="description" content="공연이 끝난 뒤 올림픽공원 출차 대기 시간을 데이터로 추정하고, 그 시간을 산책 코스로 바꿔 드립니다.">
+<link rel="stylesheet" href="style.css?v=2">
+</head>
+<body>
+<header class="top">
+  <div class="brand"><div><h1>올팍 30분</h1><p>출차 대기를 산책으로</p></div></div>
+  <div class="live" id="live" hidden><span id="liveText"></span></div>
+</header>
+
+<nav class="tabs" role="tablist" aria-label="메뉴">
+  <button role="tab" aria-selected="true" data-tab="out">지금 출차</button>
+  <button role="tab" aria-selected="false" data-tab="walk">산책 코스</button>
+  <button role="tab" aria-selected="false" data-tab="in">입차 전</button>
+  <button role="tab" aria-selected="false" data-tab="why">근거</button>
+</nav>
+
+<main>
+<!-- 1. 지금 출차 -->
+<section id="tab-out" class="panel" role="tabpanel">
+  <div class="card hero">
+    <div class="seg" role="group" aria-label="공연 규모"><button type="button" data-scale="small" aria-pressed="true">중소 규모</button><button type="button" data-scale="large" aria-pressed="false">대규모(2만 명대)</button></div>
+    <div class="row2 showrow">
+      <label>공연 시작 시각(선택)<input type="time" id="showStart"></label>
+      <label>공연 시간<select id="showDur"><option value="120">120분(중앙값)</option><option value="150" selected>150분(god 등)</option><option value="180">180분</option></select></label>
+    </div>
+    <p class="muted onset" id="onsetNote">공연 시작 시각을 넣으면 출차 몰림이 시작될 시각을 추정해 드립니다.</p>
+    <div class="lead">공연이 끝나고 출차 줄이 몰리기 시작한 뒤</div>
+    <div class="sliderrow">
+      <input id="offset" type="range" min="0" max="60" step="5" value="0" aria-label="출차 몰림 시작 후 경과 분">
+      <output id="offsetOut">0분 경과</output>
+    </div>
+    <div class="lead">이때 줄에 서면 대기는 최대</div>
+    <div class="big"><span id="waitMed">-</span><small>분</small></div>
+    <div class="range" id="waitRange"></div>
+    <div class="tag est">추정치입니다. 선택한 규모의 실측 공연일 기반</div>
+  </div>
+
+  <div class="card"><div class="compare" id="compare"></div><p class="muted note-gap">숫자는 모두 대기 상한 추정(분)입니다. 몰림이 풀린 뒤에는 0분입니다.</p></div>
+
+  <div class="card">
+    <h2>공연 후 출차 곡선 <span class="muted">(실측)</span></h2>
+    <p class="muted">5분 간격 출차 대수. 가로축은 몰림 시작 기준 분, 굵은 선은 중앙값(점선은 일부만 반영된 날).</p>
+    <div id="chart" class="chart" aria-label="출차 곡선 그래프"></div>
+    <div class="legend" id="legend"></div>
+  </div>
+  <div class="card" id="nextStep"></div>
+  <div class="card">
+    <h2>출구별 이용 비중 <span class="muted">(실측)</span></h2>
+    <div id="gates" class="bars"></div>
+  </div>
+</section>
+
+<!-- 2. 산책 -->
+<section id="tab-walk" class="panel" role="tabpanel" hidden>
+  <div class="card">
+    <h2>기다릴 시간에 맞춘 산책 코스</h2>
+    <div class="row2">
+      <label>남는 시간<select id="walkMin"><option value="15">15분</option><option value="25" selected>25분</option><option value="40">40분</option><option value="60">60분</option></select></label>
+      <label>날짜<input type="date" id="walkDate"></label>
+    </div>
+    <label class="check"><input type="checkbox" id="walkNight" checked> 해가 진 뒤(야간)</label>
+    <div id="course"></div>
+  </div>
+  <div class="card note" id="seasonNote"></div>
+</section>
+
+<!-- 3. 입차 전 -->
+<section id="tab-in" class="panel" role="tabpanel" hidden>
+  <div class="card">
+    <h2>입차 전에 알아 두면 좋은 것</h2>
+    <ul class="tips" id="inTips"></ul>
+  </div>
+  <div class="card">
+    <h2>주차구역 혼잡 기록 <span class="muted">(참고)</span></h2>
+    <p class="muted" id="lotCaveat"></p>
+    <div id="lots" class="bars"></div>
+  </div>
+  <div class="card" id="liveCard" hidden>
+    <h2>실시간 주차현황</h2>
+    <div id="liveBody"></div>
+  </div>
+</section>
+
+<!-- 4. 근거 -->
+<section id="tab-why" class="panel" role="tabpanel" hidden>
+  <div class="card">
+    <h2>어떻게 계산했나</h2>
+    <div id="method"></div>
+  </div>
+  <div class="card">
+    <h2>데이터 품질 개선 제안 <span class="muted" id="qCount"></span></h2>
+    <div id="quality"></div>
+  </div>
+  <div class="card small">
+    <h2>사용 데이터</h2>
+    <p>한국체육산업개발(주) 개방 데이터: 올림픽공원 입출차 정보(15138735, 2024-07), 2025 연계 데이터(15164822)와 게이트별 입출차(15159093)의 파일 사본(문화공공데이터광장), 주차장 혼잡도(15164156), 월별주차현황(15131671), 잔디시설정보(15143220), 영문 공연정보(15149169), 실시간 주차현황(15168686, 실시간 연동). 공연정보(3037877)는 연동 예정입니다.</p>
+    <p class="muted">본 서비스의 대기시간은 모두 통계 기반 <b>추정치</b>이며 실제 상황과 다를 수 있습니다. 현장 안내와 교통 정보를 우선하세요.</p>
+  </div>
+</section>
+</main>
+<footer>올팍 30분. 작성자 백승현. 한국체육산업개발(주) 공공데이터 활용 경진대회 출품작.</footer>
+
+<script src="config.js"></script>
+<script src="data.js"></script>
+<script src="app.js?v=2"></script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+report.html
+  FAIL 19 :21 dash "–" in copy | fix: A comma, a colon, a full stop or parentheses; never a dash
+  FAIL 20 :1 no Hallmark stamp on the first non-empty line of any CSS | fix: The stamp comment is line 1 of the CSS; only @charset may precede it
+  FAIL 34 :1 no overflow-x: clip on html and body | fix: overflow-x: clip on both html and body
+  FAIL 48 :4 font-family literal ""Apple SD Gothic Neo","Noto Sans KR…" on body | fix: Lift the value into the token block
+  FAIL 48 :4 colour literal #1c2a22 outside tokens (color on body)
+  FAIL 48 :5 colour literal #1f7a4d outside tokens (color on h1)
+  FAIL 48 :5 colour literal #1f7a4d outside tokens (border-bottom on h2)
+  FAIL 48 :5 colour literal #14452c outside tokens (color on h2)
+  FAIL 48 :6 colour literal #5d6b63 outside tokens (color on .sub)
+  FAIL 48 :7 colour literal #cfd8d2 outside tokens (border on td,th)
+  FAIL 48 :7 colour literal #e3f3ea outside tokens (background on th)
+  FAIL 48 :9 colour literal #fff1da outside tokens (background on .box)
+  FAIL 48 :9 colour literal #b86a00 outside tokens (border-left on .box)
+  FAIL 48 :10 colour literal #e3f3ea outside tokens (background on .good)
+  FAIL 48 :10 colour literal #1f7a4d outside tokens (border-left-color on .good)
+  FAIL 48 :11 colour literal #cfd8d2 outside tokens (border on figure img)
+  FAIL 48 :11 colour literal #5d6b63 outside tokens (color on figcaption)
+  FAIL 48 :12 colour literal #5d6b63 outside tokens (color on .meta)
+  FAIL 48 :12 colour literal #cfd8d2 outside tokens (border on .kpi div)
+  FAIL 48 :12 colour literal #1f7a4d outside tokens (color on .kpi b)
+  FAIL 63 :17 middle-dot meta string "한국체육산업개발(주) 공공데이터 활용 경진대회 · 작성자 백승현(개인) · 활용 데이터:…" | fix: Line breaks, columns or hairlines; one dot in a byline at most
+  WARN 3 :9 side stripe border-left: 4px solid #b86a00 on .box | fix: Hairline all round, none, or an accent square
+  WARN F3 :5 no text-wrap: balance on any display head (2 head rule(s), e.g. h1) | fix: Add text-wrap: balance to h1/h2-level heads
+  WARN F23 :1 the document lacks a meta description | fix: Name the language, title the page in its own words, and describe it in one sentence for link previews
+sloplint: 21 FAIL, 3 WARN across 1 file(s).

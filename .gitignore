@@ -1,0 +1,6 @@
+data/raw/
+data/raw_api/
+data/raw_kcisa/
+__pycache__/
+*.pyc
+.DS_Store

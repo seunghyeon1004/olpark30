@@ -1,0 +1,45 @@
+style.css
+  FAIL 7a :8 pure #fff: color: #fff (.logo) | fix: Tint the base toward the anchor hue
+  FAIL 7a :42 pure #fff: color: #fff (.num)
+  FAIL 7a :55 pure #fff: color: #fff (button.cta)
+  FAIL 20 :1 no Hallmark stamp on the first non-empty line of any CSS | fix: The stamp comment is line 1 of the CSS; only @charset may precede it
+  FAIL 26a :1 no :focus-visible styling anywhere | fix: A focus ring at 3:1 or better, instant
+  FAIL 34 :1 no overflow-x: clip on html and body | fix: overflow-x: clip on both html and body
+  FAIL 48 :5 font-family literal "-apple-system,BlinkMacSystemFont,"A…" on body | fix: Lift the value into the token block
+  FAIL 48 :8 colour literal #fff outside tokens (color on .logo)
+  FAIL 48 :42 colour literal #fff outside tokens (color on .num)
+  FAIL 48 :55 colour literal #fff outside tokens (color on button.cta)
+  REFLEX 24b :6 padding: 14px 16px 6px (off the 4px scale) on .top | fix: Use the 4px spacing scale
+  REFLEX 24b :7 gap: 10px (off the 4px scale) on .brand
+  REFLEX 24b :10 padding: 4px 10px (off the 4px scale) on .live
+  REFLEX 24b :10 gap: 6px (off the 4px scale) on .live
+  REFLEX 24b :13 padding: 11px 0 (off the 4px scale) on .tabs button
+  REFLEX 24b :16 margin: 10px 0 (off the 4px scale) on .card
+  REFLEX 24b :25 margin-left: 6px (off the 4px scale) on .big small
+  REFLEX 24b :27 margin-top: 10px (off the 4px scale) on .tag
+  REFLEX 24b :27 padding: 3px 10px (off the 4px scale) on .tag
+  REFLEX 24b :30 padding: 10px 4px (off the 4px scale) on .cmp
+  REFLEX 24b :34 gap: 6px 12px (off the 4px scale) on .legend
+  REFLEX 24b :34 margin-top: 6px (off the 4px scale) on .legend
+  REFLEX 24b :36 gap: 10px (off the 4px scale) on .row2
+  REFLEX 24b :38 padding: 10px (off the 4px scale) on select,input[type=date]
+  REFLEX 24b :39 margin: 6px 0 12px (off the 4px scale) on .check
+  REFLEX 24b :44 margin-left: 6px (off the 4px scale) on .pill
+  REFLEX 24b :47 padding-left: 18px (off the 4px scale) on .tips
+  REFLEX 24b :47 margin: 6px 0 (off the 4px scale) on .tips li
+  REFLEX 24b :48 margin: 6px 0 (off the 4px scale) on .bars .bar
+  REFLEX 24b :51 padding: 10px 0 (off the 4px scale) on .q
+  REFLEX 24b :52 margin-left: 6px (off the 4px scale) on .q .sev
+  REFLEX 24b :55 margin-top: 10px (off the 4px scale) on button.cta
+  REFLEX 24b :55 padding: 14px (off the 4px scale) on button.cta
+  REFLEX 24b :57 padding: 6px 4px (off the 4px scale) on table.m td,table.m th
+  REFLEX 26b :1 no :active styling anywhere | fix: All eight states; guard: not a form control, no aria-disabled anywhere
+  REFLEX 26b :1 no :disabled styling anywhere
+  WARN 40 :8 2.11:1 < 3:1 on .logo | fix: Raise the contrast to threshold
+  WARN 40 :42 2.11:1 < 4.5:1 on .num
+  WARN 40 :55 2.11:1 < 4.5:1 on button.cta
+  WARN 41 :16 dark surface (L 24%) on .card sets no text colour | fix: Swap text to paper in the same rule
+  WARN F3 :9 no text-wrap: balance on any display head (2 head rule(s), e.g. h1) | fix: Add text-wrap: balance to h1/h2-level heads
+index.html
+  FAIL 54 :12 eyebrow "P" before <div> | fix: Cut it; the heading already says this (craft.md § 7 has twelve other openings)
+sloplint: 11 FAIL, 26 REFLEX, 5 WARN across 2 file(s).
