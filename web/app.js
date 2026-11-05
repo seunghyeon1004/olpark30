@@ -121,7 +121,7 @@ function renderCourse(){
   var h="";
   if(!pick.length){h='<p>이 시간으로는 코스를 만들기 어렵습니다. 주차장 근처에서 잠깐 걷는 정도를 권합니다.</p>'}
   else{
-    h=pick.map(function(p,i){return '<div class="stop"><div class="num">'+i+1+'</div><div><b>'+esc(p.n)+'<span class="pill'+(p.src==="data"?"":" g")+'">'+(p.src==="data"?"공공데이터":"일반 안내")+'</span></b><div class="m">약 '+p.t+'분. '+esc(p.m)+'</div></div></div>'}).join("");
+    h=pick.map(function(p,i){return '<div class="stop"><div class="num">'+(i+1)+'</div><div><b>'+esc(p.n)+'<span class="pill'+(p.src==="data"?"":" g")+'">'+(p.src==="data"?"공공데이터":"일반 안내")+'</span></b><div class="m">약 '+p.t+'분. '+esc(p.m)+'</div></div></div>'}).join("");
     h+='<p class="muted note-gap">걷기 약 '+sum+'분 + 이동·복귀 여유 약 8분 = 약 '+(sum+8)+'분 (모두 추정). 출차 몰림이 풀린 뒤 차로 돌아가세요.</p>';
   }
   $("#course").innerHTML=h;
